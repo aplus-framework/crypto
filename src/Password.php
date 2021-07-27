@@ -9,6 +9,8 @@
  */
 namespace Framework\Crypto;
 
+use InvalidArgumentException;
+
 class Password
 {
     public const LIMIT_INTERACTIVE = 0;
@@ -54,7 +56,7 @@ class Password
             static::LIMIT_INTERACTIVE => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
             static::LIMIT_MODERATE => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE,
             static::LIMIT_SENSITIVE => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_SENSITIVE,
-            default => throw new \InvalidArgumentException(
+            default => throw new InvalidArgumentException(
                 'Invalid opslimit value: ' . $constant
             )
         };
@@ -66,7 +68,7 @@ class Password
             static::LIMIT_INTERACTIVE => \SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE,
             static::LIMIT_MODERATE => \SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE,
             static::LIMIT_SENSITIVE => \SODIUM_CRYPTO_PWHASH_MEMLIMIT_SENSITIVE,
-            default => throw new \InvalidArgumentException(
+            default => throw new InvalidArgumentException(
                 'Invalid memlimit value: ' . $constant
             )
         };
