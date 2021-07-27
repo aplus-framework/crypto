@@ -1,0 +1,59 @@
+{
+    "name": "aplus/crypto",
+    "type": "library",
+    "description": "Aplus Framework Crypto Library",
+    "keywords": [
+        "crypt",
+        "crypto",
+        "cryptography",
+        "password",
+        "sign",
+        "secret-box",
+        "generic-hash",
+        "sodium"
+    ],
+    "homepage": "https://aplus-framework.com/docs/crypto",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Natan Felles",
+            "email": "natanfelles@gmail.com",
+            "homepage": "https://natanfelles.github.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "ext-xdebug": "*",
+        "aplus/coding-standard": "^1.9",
+        "ergebnis/composer-normalize": "^2.15",
+        "phpmd/phpmd": "^2.10",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.5"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Framework\\Crypto\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Crypto\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "support": {
+        "email": "natanfelles@gmail.com",
+        "issues": "https://gitlab.com/aplus-framework/libraries/crypto/issues",
+        "wiki": "https://gitlab.com/aplus-framework/libraries/crypto/wikis/home",
+        "source": "https://gitlab.com/aplus-framework/libraries/crypto",
+        "docs": "https://aplus-framework.gitlab.io/libraries/crypto/docs/"
+    }
+}
