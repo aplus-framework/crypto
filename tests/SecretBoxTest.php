@@ -38,4 +38,22 @@ final class SecretBoxTest extends TestCase
         self::assertNotSame($message, $ciphertext);
         self::assertSame($message, $secretBox->decrypt($ciphertext));
     }
+
+    public function testKeyException() : void
+    {
+        $this->expectException(\LengthException::class);
+        $this->expectExceptionMessage(
+            'SecretBox key has not the required length (32 bytes), 3 given'
+        );
+        new SecretBox('foo', SecretBox::makeNonce());
+    }
+
+    public function testNonceException() : void
+    {
+        $this->expectException(\LengthException::class);
+        $this->expectExceptionMessage(
+            'SecretBox nonce has not the required length (24 bytes), 4 given'
+        );
+        new SecretBox(SecretBox::makeKey(), 'bazz');
+    }
 }

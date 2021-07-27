@@ -9,6 +9,8 @@
  */
 namespace Framework\Crypto;
 
+use LengthException;
+
 class SecretBox
 {
     protected string $key;
@@ -16,8 +18,27 @@ class SecretBox
 
     public function __construct(string $key, string $nonce)
     {
+        $this->validatedLengths($key, $nonce);
         $this->key = $key;
         $this->nonce = $nonce;
+    }
+
+    protected function validatedLengths(string $key, string $nonce) : void
+    {
+        $length = \mb_strlen($key, '8bit');
+        if ($length !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
+            throw new LengthException(
+                'SecretBox key has not the required length (32 bytes), '
+                . $length . ' given'
+            );
+        }
+        $length = \mb_strlen($nonce, '8bit');
+        if ($length !== \SODIUM_CRYPTO_SECRETBOX_NONCEBYTES) {
+            throw new LengthException(
+                'SecretBox nonce has not the required length (24 bytes), '
+                . $length . ' given'
+            );
+        }
     }
 
     public function encrypt(string $message) : string
