@@ -9,6 +9,11 @@
  */
 namespace Framework\Crypto;
 
+/**
+ * Class Utils.
+ *
+ * @package crypto
+ */
 class Utils
 {
     public static function bin2hex(string $string) : string

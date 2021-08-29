@@ -11,6 +11,11 @@ namespace Framework\Crypto;
 
 use InvalidArgumentException;
 
+/**
+ * Class Password.
+ *
+ * @package crypto
+ */
 class Password
 {
     public const LIMIT_INTERACTIVE = 0;

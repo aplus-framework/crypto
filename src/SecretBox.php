@@ -11,6 +11,11 @@ namespace Framework\Crypto;
 
 use LengthException;
 
+/**
+ * Class SecretBox.
+ *
+ * @package crypto
+ */
 class SecretBox
 {
     protected string $key;
