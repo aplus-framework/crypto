@@ -12,7 +12,7 @@
         "generic-hash",
         "sodium"
     ],
-    "homepage": "https://aplus-framework.com/docs/crypto",
+    "homepage": "https://docs.aplus-framework.com/guides/libraries/crypto/",
     "license": "MIT",
     "authors": [
         {
@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "aplus/coding-standard": "^1.9",
+        "aplus/coding-standard": "^1.10",
         "ergebnis/composer-normalize": "^2.15",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^0.12",
@@ -51,10 +51,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "support": {
-        "email": "natanfelles@gmail.com",
+        "email": "support@aplus-framework.com",
         "issues": "https://gitlab.com/aplus-framework/libraries/crypto/issues",
         "wiki": "https://gitlab.com/aplus-framework/libraries/crypto/wikis/home",
         "source": "https://gitlab.com/aplus-framework/libraries/crypto",
-        "docs": "https://aplus-framework.gitlab.io/libraries/crypto/docs/"
+        "docs": "https://docs.aplus-framework.com/guides/libraries/crypto/"
     }
 }
