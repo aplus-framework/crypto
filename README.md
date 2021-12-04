@@ -2,6 +2,7 @@
 
 # Aplus Framework Crypto Library
 
+- [Homepage](https://aplus-framework.com/packages/crypto)
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/crypto/index.html)
 - [API Documentation](https://docs.aplus-framework.com/packages/crypto.html)
 
