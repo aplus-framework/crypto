@@ -12,7 +12,7 @@
         "generic-hash",
         "sodium"
     ],
-    "homepage": "https://docs.aplus-framework.com/guides/libraries/crypto/",
+    "homepage": "https://aplus-framework.com/packages/crypto",
     "license": "MIT",
     "authors": [
         {
@@ -53,13 +53,13 @@
     "support": {
         "email": "support@aplus-framework.com",
         "issues": "https://gitlab.com/aplus-framework/libraries/crypto/issues",
-        "wiki": "https://gitlab.com/aplus-framework/libraries/crypto/wikis/home",
+        "forum": "https://aplus-framework.com/forum",
         "source": "https://gitlab.com/aplus-framework/libraries/crypto",
         "docs": "https://docs.aplus-framework.com/guides/libraries/crypto/"
     },
     "funding": [
         {
-            "type": "other",
+            "type": "Aplus Sponsor",
             "url": "https://aplus-framework.com/sponsor"
         }
     ]
