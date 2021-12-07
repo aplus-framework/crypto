@@ -13,13 +13,13 @@ use Framework\Crypto\Password;
 
 class PasswordMock extends Password
 {
-    public static function getMemLimit(int $constant) : int
+    public static function getSodiumMemLimit(int $constant) : int
     {
-        return parent::getMemLimit($constant);
+        return parent::getSodiumMemLimit($constant);
     }
 
-    public static function getOpsLimit(int $constant) : int
+    public static function getSodiumOpsLimit(int $constant) : int
     {
-        return parent::getOpsLimit($constant);
+        return parent::getSodiumOpsLimit($constant);
     }
 }

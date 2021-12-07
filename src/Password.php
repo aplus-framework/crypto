@@ -21,32 +21,34 @@ class Password
     public const LIMIT_INTERACTIVE = 0;
     public const LIMIT_MODERATE = 1;
     public const LIMIT_SENSITIVE = 2;
+    protected static int $opsLimit = Password::LIMIT_INTERACTIVE;
+    protected static int $memLimit = Password::LIMIT_INTERACTIVE;
 
     public static function hash(
         string $password,
-        int $opslimit = Password::LIMIT_INTERACTIVE,
-        int $memlimit = Password::LIMIT_INTERACTIVE
+        int $opslimit = null,
+        int $memlimit = null
     ) : string {
-        $opslimit = static::getOpsLimit($opslimit);
-        $memlimit = static::getMemLimit($memlimit);
+        $opslimit ??= static::getOpsLimit();
+        $memlimit ??= static::getMemLimit();
         return \sodium_crypto_pwhash_str(
             $password,
-            $opslimit,
-            $memlimit
+            static::getSodiumOpsLimit($opslimit),
+            static::getSodiumMemLimit($memlimit)
         );
     }
 
     public static function needsRehash(
         string $hash,
-        int $opslimit = Password::LIMIT_INTERACTIVE,
-        int $memlimit = Password::LIMIT_INTERACTIVE
+        int $opslimit = null,
+        int $memlimit = null
     ) : bool {
-        $opslimit = static::getOpsLimit($opslimit);
-        $memlimit = static::getMemLimit($memlimit);
+        $opslimit ??= static::getOpsLimit();
+        $memlimit ??= static::getMemLimit();
         return \sodium_crypto_pwhash_str_needs_rehash(
             $hash,
-            $opslimit,
-            $memlimit
+            static::getSodiumOpsLimit($opslimit),
+            static::getSodiumMemLimit($memlimit)
         );
     }
 
@@ -55,7 +57,27 @@ class Password
         return \sodium_crypto_pwhash_str_verify($hash, $password);
     }
 
-    protected static function getOpsLimit(int $constant) : int
+    public static function setOpsLimit(int $opsLimit) : void
+    {
+        static::$opsLimit = $opsLimit;
+    }
+
+    public static function getOpsLimit() : int
+    {
+        return static::$opsLimit;
+    }
+
+    public static function setMemLimit(int $memLimit) : void
+    {
+        static::$memLimit = $memLimit;
+    }
+
+    public static function getMemLimit() : int
+    {
+        return static::$memLimit;
+    }
+
+    protected static function getSodiumOpsLimit(int $constant) : int
     {
         return match ($constant) {
             static::LIMIT_INTERACTIVE => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
@@ -67,7 +89,7 @@ class Password
         };
     }
 
-    protected static function getMemLimit(int $constant) : int
+    protected static function getSodiumMemLimit(int $constant) : int
     {
         return match ($constant) {
             static::LIMIT_INTERACTIVE => \SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE,

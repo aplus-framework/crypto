@@ -42,41 +42,55 @@ final class PasswordTest extends TestCase
         self::assertFalse(Password::verify('secret', $hash));
     }
 
-    public function testGetOpsLimit() : void
+    public function testGetSetOpsLimit() : void
+    {
+        self::assertSame(Password::LIMIT_INTERACTIVE, Password::getOpsLimit());
+        Password::setOpsLimit(Password::LIMIT_MODERATE);
+        self::assertSame(Password::LIMIT_MODERATE, Password::getOpsLimit());
+    }
+
+    public function testGetSodiumOpsLimit() : void
     {
         self::assertSame(
             \SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
-            PasswordMock::getOpsLimit(Password::LIMIT_INTERACTIVE)
+            PasswordMock::getSodiumOpsLimit(Password::LIMIT_INTERACTIVE)
         );
         self::assertSame(
             \SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE,
-            PasswordMock::getOpsLimit(Password::LIMIT_MODERATE)
+            PasswordMock::getSodiumOpsLimit(Password::LIMIT_MODERATE)
         );
         self::assertSame(
             \SODIUM_CRYPTO_PWHASH_OPSLIMIT_SENSITIVE,
-            PasswordMock::getOpsLimit(Password::LIMIT_SENSITIVE)
+            PasswordMock::getSodiumOpsLimit(Password::LIMIT_SENSITIVE)
         );
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid opslimit value: 369');
-        PasswordMock::getOpsLimit(369);
+        PasswordMock::getSodiumOpsLimit(369);
     }
 
-    public function testGetMemLimit() : void
+    public function testGetSetMemLimit() : void
+    {
+        self::assertSame(Password::LIMIT_INTERACTIVE, Password::getMemLimit());
+        Password::setMemLimit(Password::LIMIT_MODERATE);
+        self::assertSame(Password::LIMIT_MODERATE, Password::getMemLimit());
+    }
+
+    public function testGetSodiumMemLimit() : void
     {
         self::assertSame(
             \SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE,
-            PasswordMock::getMemLimit(Password::LIMIT_INTERACTIVE)
+            PasswordMock::getSodiumMemLimit(Password::LIMIT_INTERACTIVE)
         );
         self::assertSame(
             \SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE,
-            PasswordMock::getMemLimit(Password::LIMIT_MODERATE)
+            PasswordMock::getSodiumMemLimit(Password::LIMIT_MODERATE)
         );
         self::assertSame(
             \SODIUM_CRYPTO_PWHASH_MEMLIMIT_SENSITIVE,
-            PasswordMock::getMemLimit(Password::LIMIT_SENSITIVE)
+            PasswordMock::getSodiumMemLimit(Password::LIMIT_SENSITIVE)
         );
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid memlimit value: 369');
-        PasswordMock::getMemLimit(369);
+        PasswordMock::getSodiumMemLimit(369);
     }
 }
