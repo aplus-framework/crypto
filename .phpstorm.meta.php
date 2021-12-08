@@ -1,0 +1,75 @@
+<?php
+/*
+ * This file is part of Aplus Framework Crypto Library.
+ *
+ * (c) Natan Felles <natanfelles@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace PHPSTORM_META;
+
+registerArgumentsSet(
+    'base64_variants',
+    \SODIUM_BASE64_VARIANT_ORIGINAL,
+    \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING,
+    \SODIUM_BASE64_VARIANT_URLSAFE,
+    \SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING,
+);
+registerArgumentsSet(
+    'generichash_bytes',
+    \SODIUM_CRYPTO_GENERICHASH_BYTES,
+    \SODIUM_CRYPTO_GENERICHASH_BYTES_MAX,
+    \SODIUM_CRYPTO_GENERICHASH_BYTES_MIN,
+);
+registerArgumentsSet(
+    'password_limits',
+    \Framework\Crypto\Password::LIMIT_INTERACTIVE,
+    \Framework\Crypto\Password::LIMIT_MODERATE,
+    \Framework\Crypto\Password::LIMIT_SENSITIVE,
+);
+expectedArguments(
+    \Framework\Crypto\GenericHash::__construct(),
+    1,
+    argumentsSet('generichash_bytes')
+);
+expectedArguments(
+    \Framework\Crypto\Password::hash(),
+    1,
+    argumentsSet('password_limits')
+);
+expectedArguments(
+    \Framework\Crypto\Password::hash(),
+    2,
+    argumentsSet('password_limits')
+);
+expectedArguments(
+    \Framework\Crypto\Password::needsRehash(),
+    1,
+    argumentsSet('password_limits')
+);
+expectedArguments(
+    \Framework\Crypto\Password::needsRehash(),
+    2,
+    argumentsSet('password_limits')
+);
+expectedArguments(
+    \Framework\Crypto\Password::setMemLimit(),
+    0,
+    argumentsSet('password_limits')
+);
+expectedArguments(
+    \Framework\Crypto\Password::setOpsLimit(),
+    0,
+    argumentsSet('password_limits')
+);
+expectedArguments(
+    \Framework\Crypto\Utils::base642bin(),
+    1,
+    argumentsSet('base64_variants')
+);
+expectedArguments(
+    \Framework\Crypto\Utils::bin2base64(),
+    1,
+    argumentsSet('base64_variants')
+);
