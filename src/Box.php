@@ -58,27 +58,29 @@ class Box
         return $this->nonce;
     }
 
+    protected function getKeyPair() : string
+    {
+        return \sodium_crypto_box_keypair_from_secretkey_and_publickey(
+            $this->secretKey,
+            $this->publicKey
+        );
+    }
+
     public function encrypt(string $message, string $nonce = null) : string
     {
         return \sodium_crypto_box(
             $message,
             $this->getNonce($nonce),
-            \sodium_crypto_box_keypair_from_secretkey_and_publickey(
-                $this->secretKey,
-                $this->publicKey
-            )
+            $this->getKeyPair()
         );
     }
 
-    public function decrypt(string $ciphertext, string $nonce = null) : false|string
+    public function decrypt(string $ciphertext, string $nonce = null) : false | string
     {
         return \sodium_crypto_box_open(
             $ciphertext,
             $this->getNonce($nonce),
-            \sodium_crypto_box_keypair_from_secretkey_and_publickey(
-                $this->secretKey,
-                $this->publicKey
-            )
+            $this->getKeyPair()
         );
     }
 }
