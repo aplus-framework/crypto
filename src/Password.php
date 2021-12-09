@@ -10,6 +10,7 @@
 namespace Framework\Crypto;
 
 use InvalidArgumentException;
+use SodiumException;
 
 /**
  * Class Password.
@@ -24,6 +25,19 @@ class Password
     protected static int $opsLimit = Password::LIMIT_INTERACTIVE;
     protected static int $memLimit = Password::LIMIT_INTERACTIVE;
 
+    /**
+     * Makes a password hash.
+     *
+     * @param string $password
+     * @param int|null $opslimit A Password constant or null to use the default
+     * set for opslimit
+     * @param int|null $memlimit A Password constant or null to use the default
+     * set for memlimit
+     *
+     * @throws SodiumException
+     *
+     * @return string
+     */
     public static function hash(
         string $password,
         int $opslimit = null,
@@ -38,6 +52,17 @@ class Password
         );
     }
 
+    /**
+     * Checks if a hash needs to be rehashed based on the ops and mem limits.
+     *
+     * @param string $hash
+     * @param int|null $opslimit A Password constant or null to use the default
+     * set for opslimit
+     * @param int|null $memlimit A Password constant or null to use the default
+     * set for memlimit
+     *
+     * @return bool
+     */
     public static function needsRehash(
         string $hash,
         int $opslimit = null,
@@ -52,31 +77,70 @@ class Password
         );
     }
 
+    /**
+     * Verifies a password against a hash.
+     *
+     * @param string $password
+     * @param string $hash
+     *
+     * @throws SodiumException
+     *
+     * @return bool
+     */
     public static function verify(string $password, string $hash) : bool
     {
         return \sodium_crypto_pwhash_str_verify($hash, $password);
     }
 
+    /**
+     * Sets the default Password operations limit.
+     *
+     * @param int $opsLimit A Password constant value
+     */
     public static function setOpsLimit(int $opsLimit) : void
     {
         static::$opsLimit = $opsLimit;
     }
 
+    /**
+     * Gets the default Password operations limit constant value.
+     *
+     * @return int
+     */
     public static function getOpsLimit() : int
     {
         return static::$opsLimit;
     }
 
+    /**
+     * Sets the default Password memory limit.
+     *
+     * @param int $memLimit A Password constant value
+     */
     public static function setMemLimit(int $memLimit) : void
     {
         static::$memLimit = $memLimit;
     }
 
+    /**
+     * Gets the default Password memory limit constant value.
+     *
+     * @return int
+     */
     public static function getMemLimit() : int
     {
         return static::$memLimit;
     }
 
+    /**
+     * Gets an appropriate sodium operations limit value from a Password constant.
+     *
+     * @param int $constant
+     *
+     * @throws InvalidArgumentException if constant value is invalid
+     *
+     * @return int
+     */
     protected static function getSodiumOpsLimit(int $constant) : int
     {
         return match ($constant) {
@@ -89,6 +153,15 @@ class Password
         };
     }
 
+    /**
+     * Gets an appropriate sodium memory limit value from a Password constant.
+     *
+     * @param int $constant
+     *
+     * @throws InvalidArgumentException if constant value is invalid
+     *
+     * @return int
+     */
     protected static function getSodiumMemLimit(int $constant) : int
     {
         return match ($constant) {

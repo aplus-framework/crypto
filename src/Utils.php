@@ -9,6 +9,8 @@
  */
 namespace Framework\Crypto;
 
+use SodiumException;
+
 /**
  * Class Utils.
  *
@@ -16,16 +18,46 @@ namespace Framework\Crypto;
  */
 class Utils
 {
+    /**
+     * Converts a binary string to hexadecimal.
+     *
+     * @param string $string
+     *
+     * @throws SodiumException
+     *
+     * @return string The hexadecimal string
+     */
     public static function bin2hex(string $string) : string
     {
         return \sodium_bin2hex($string);
     }
 
+    /**
+     * Converts a hexadecimal string to binary.
+     *
+     * @param string $string
+     * @param string $ignore
+     *
+     * @throws SodiumException
+     *
+     * @return string The binary string
+     */
     public static function hex2bin(string $string, string $ignore = '') : string
     {
         return \sodium_hex2bin($string, $ignore);
     }
 
+    /**
+     * Converts a base64 string to binary.
+     *
+     * @param string $string
+     * @param int $id
+     * @param string $ignore
+     *
+     * @throws SodiumException
+     *
+     * @return string The binary string
+     */
     public static function base642bin(
         string $string,
         int $id = \SODIUM_BASE64_VARIANT_ORIGINAL,
@@ -34,6 +66,16 @@ class Utils
         return \sodium_base642bin($string, $id, $ignore);
     }
 
+    /**
+     * Converts a binary string to base64.
+     *
+     * @param string $string
+     * @param int $id
+     *
+     * @throws SodiumException
+     *
+     * @return string The base64 encoded string
+     */
     public static function bin2base64(
         string $string,
         int $id = \SODIUM_BASE64_VARIANT_ORIGINAL,

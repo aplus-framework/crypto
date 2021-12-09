@@ -11,6 +11,7 @@ namespace Framework\Crypto;
 
 use LengthException;
 use RangeException;
+use SodiumException;
 
 /**
  * Class GenericHash.
@@ -22,6 +23,17 @@ class GenericHash
     protected string $key;
     protected int $hashLength = \SODIUM_CRYPTO_GENERICHASH_BYTES;
 
+    /**
+     * GenericHash constructor.
+     *
+     * @param string $key
+     * @param int $hashLength
+     *
+     * @see GenericHash::makeKey()
+     *
+     * @throws LengthException if key length is not between 16 and 64
+     * @throws RangeException if the hashLength value is not in the range 16 to 64
+     */
     public function __construct(string $key, int $hashLength = \SODIUM_CRYPTO_GENERICHASH_BYTES)
     {
         $this->validateKey($key);
@@ -30,6 +42,13 @@ class GenericHash
         $this->hashLength = $hashLength;
     }
 
+    /**
+     * Validates a key.
+     *
+     * @param string $key
+     *
+     * @throws LengthException if key length is not between 16 and 64
+     */
     protected function validateKey(string $key) : void
     {
         $length = \mb_strlen($key, '8bit');
@@ -45,6 +64,13 @@ class GenericHash
         }
     }
 
+    /**
+     * Validates a hash length.
+     *
+     * @param int $length
+     *
+     * @throws RangeException if the length value is not in the range 16 to 64
+     */
     protected function validateHashLength(int $length) : void
     {
         if ($length < \SODIUM_CRYPTO_GENERICHASH_BYTES_MIN
@@ -58,6 +84,18 @@ class GenericHash
         }
     }
 
+    /**
+     * Gets a message signature.
+     *
+     * @param string $message
+     * @param int|null $hashLength A custom hash length or null to use the length set in
+     * the constructor
+     *
+     * @throws RangeException if the hashLength is set and is not in the range 16 to 64
+     * @throws SodiumException
+     *
+     * @return string
+     */
     public function signature(string $message, int $hashLength = null) : string
     {
         return Utils::bin2base64(
@@ -66,6 +104,19 @@ class GenericHash
         );
     }
 
+    /**
+     * Verifies if a message matches a signature.
+     *
+     * @param string $message
+     * @param string $signature
+     * @param int|null $hashLength A custom hash length or null to use the length set in
+     * the constructor
+     *
+     * @throws RangeException if the hashLength is set and is not in the range 16 to 64
+     * @throws SodiumException
+     *
+     * @return bool
+     */
     public function verify(string $message, string $signature, int $hashLength = null) : bool
     {
         return \hash_equals(
@@ -74,6 +125,18 @@ class GenericHash
         );
     }
 
+    /**
+     * Makes a hash to a message.
+     *
+     * @param string $message
+     * @param int|null $length A custom length or null to use the length set in
+     * the constructor
+     *
+     * @throws RangeException if the length is set and is not in the range 16 to 64
+     * @throws SodiumException
+     *
+     * @return string
+     */
     protected function makeHash(string $message, int $length = null) : string
     {
         if ($length !== null) {
@@ -86,6 +149,11 @@ class GenericHash
         );
     }
 
+    /**
+     * Makes a key.
+     *
+     * @return string
+     */
     public static function makeKey() : string
     {
         return \sodium_crypto_generichash_keygen();

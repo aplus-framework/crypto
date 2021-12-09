@@ -9,6 +9,8 @@
  */
 namespace Framework\Crypto;
 
+use SodiumException;
+
 /**
  * Class BoxSeal.
  *
@@ -18,12 +20,37 @@ class BoxSeal
 {
     use BoxTrait;
 
+    /**
+     * Encrypts a message with an anonymous public key.
+     *
+     * @param string $message
+     * @param string $publicKey
+     *
+     * @see BoxTrait::makePublicKey()
+     *
+     * @throws SodiumException
+     *
+     * @return string
+     */
     public static function encrypt(string $message, string $publicKey) : string
     {
         return \sodium_crypto_box_seal($message, $publicKey);
     }
 
-    public static function decrypt(string $ciphertext, string $keyPair) : false|string
+    /**
+     * Decrypts a message ciphertext.
+     *
+     * @param string $ciphertext
+     * @param string $keyPair
+     *
+     * @see BoxTrait::makeKeyPair()
+     *
+     * @throws SodiumException
+     *
+     * @return false|string The message or false if the ciphertext could not be
+     * decrypted
+     */
+    public static function decrypt(string $ciphertext, string $keyPair) : false | string
     {
         return \sodium_crypto_box_seal_open($ciphertext, $keyPair);
     }

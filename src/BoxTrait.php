@@ -9,6 +9,9 @@
  */
 namespace Framework\Crypto;
 
+use Exception;
+use SodiumException;
+
 /**
  * Trait BoxTrait.
  *
@@ -16,21 +19,55 @@ namespace Framework\Crypto;
  */
 trait BoxTrait
 {
+    /**
+     * Makes a keypair.
+     *
+     * @throws SodiumException
+     */
     public static function makeKeyPair() : string
     {
         return \sodium_crypto_box_keypair();
     }
 
+    /**
+     * Makes a box nonce with the correct length.
+     *
+     * @throws Exception if fail to get random bytes
+     *
+     * @return string
+     */
     public static function makeNonce() : string
     {
         return \random_bytes(\SODIUM_CRYPTO_BOX_NONCEBYTES);
     }
 
+    /**
+     * Makes the secret key from a keypair.
+     *
+     * @param string $keyPair
+     *
+     * @see BoxTrait::makeKeyPair()
+     *
+     * @throws SodiumException
+     *
+     * @return string
+     */
     public static function makeSecretKey(string $keyPair) : string
     {
         return \sodium_crypto_box_secretkey($keyPair);
     }
 
+    /**
+     * Makes the public key from a keypair.
+     *
+     * @param string $keyPair
+     *
+     * @see BoxTrait::makeKeyPair()
+     *
+     * @throws SodiumException
+     *
+     * @return string
+     */
     public static function makePublicKey(string $keyPair) : string
     {
         return \sodium_crypto_box_publickey($keyPair);

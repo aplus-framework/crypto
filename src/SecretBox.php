@@ -9,7 +9,9 @@
  */
 namespace Framework\Crypto;
 
+use Exception;
 use LengthException;
+use SodiumException;
 
 /**
  * Class SecretBox.
@@ -21,6 +23,17 @@ class SecretBox
     protected string $key;
     protected string $nonce;
 
+    /**
+     * SecretBox constructor.
+     *
+     * @param string $key
+     * @param string $nonce
+     *
+     * @see SecretBox::makeKey()
+     * @see SecretBox::makeNonce()
+     *
+     * @throws LengthException if key or nonce has not the required length
+     */
     public function __construct(string $key, string $nonce)
     {
         $this->validatedLengths($key, $nonce);
@@ -28,6 +41,14 @@ class SecretBox
         $this->nonce = $nonce;
     }
 
+    /**
+     * Validates key and nonce.
+     *
+     * @param string $key
+     * @param string $nonce
+     *
+     * @throws LengthException if key or nonce has not the required length
+     */
     protected function validatedLengths(string $key, string $nonce) : void
     {
         $length = \mb_strlen($key, '8bit');
@@ -46,21 +67,51 @@ class SecretBox
         }
     }
 
+    /**
+     * Encrypts a secret box message.
+     *
+     * @param string $message
+     *
+     * @throws SodiumException
+     *
+     * @return string
+     */
     public function encrypt(string $message) : string
     {
         return \sodium_crypto_secretbox($message, $this->nonce, $this->key);
     }
 
+    /**
+     * Decrypts a secret box message ciphertext.
+     *
+     * @param string $ciphertext
+     *
+     * @throws SodiumException
+     *
+     * @return false|string
+     */
     public function decrypt(string $ciphertext) : false | string
     {
         return \sodium_crypto_secretbox_open($ciphertext, $this->nonce, $this->key);
     }
 
+    /**
+     * Makes a secret box key.
+     *
+     * @return string
+     */
     public static function makeKey() : string
     {
         return \sodium_crypto_secretbox_keygen();
     }
 
+    /**
+     * Makes a secret box nonce with the correct length.
+     *
+     * @throws Exception if fail to get random bytes
+     *
+     * @return string
+     */
     public static function makeNonce() : string
     {
         return \random_bytes(\SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
