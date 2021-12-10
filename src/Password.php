@@ -19,8 +19,26 @@ use SodiumException;
  */
 class Password
 {
+    /**
+     * Used to set operations or memory limit as interactive.
+     * It enables the use of 2 CPU operations or 64 MB RAM.
+     *
+     * @var int
+     */
     public const LIMIT_INTERACTIVE = 0;
+    /**
+     * Used to set operations or memory limit as moderate.
+     * It enables the use of 3 CPU operations or 256 MB RAM.
+     *
+     * @var int
+     */
     public const LIMIT_MODERATE = 1;
+    /**
+     * Used to set operations or memory limit as sensitive.
+     * It enables the use of 4 CPU operations or 1 GB RAM.
+     *
+     * @var int
+     */
     public const LIMIT_SENSITIVE = 2;
     protected static int $opsLimit = Password::LIMIT_INTERACTIVE;
     protected static int $memLimit = Password::LIMIT_INTERACTIVE;
@@ -32,7 +50,11 @@ class Password
      * @param int|null $opslimit A Password constant or null to use the default
      * set for opslimit
      * @param int|null $memlimit A Password constant or null to use the default
-     * set for memlimit
+     * set for memlimit. Typically, it should be paired with the opslimit value
+     *
+     * @see Password::LIMIT_INTERACTIVE
+     * @see Password::LIMIT_MODERATE
+     * @see Password::LIMIT_SENSITIVE
      *
      * @throws SodiumException
      *
@@ -96,6 +118,10 @@ class Password
      * Sets the default Password operations limit.
      *
      * @param int $opsLimit A Password constant value
+     *
+     * @see Password::LIMIT_INTERACTIVE
+     * @see Password::LIMIT_MODERATE
+     * @see Password::LIMIT_SENSITIVE
      */
     public static function setOpsLimit(int $opsLimit) : void
     {
@@ -115,7 +141,12 @@ class Password
     /**
      * Sets the default Password memory limit.
      *
-     * @param int $memLimit A Password constant value
+     * @param int $memLimit A Password constant value. Typically, it should be
+     * paired with the opslimit value
+     *
+     * @see Password::LIMIT_INTERACTIVE
+     * @see Password::LIMIT_MODERATE
+     * @see Password::LIMIT_SENSITIVE
      */
     public static function setMemLimit(int $memLimit) : void
     {
