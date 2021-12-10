@@ -1,6 +1,9 @@
 Crypto
 ======
 
+.. image:: image.png
+    :alt: Aplus Framework Crypto Library
+
 Aplus Framework Crypto Library.
 
 - `Installation`_
