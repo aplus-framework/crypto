@@ -2,10 +2,11 @@
 
 # Aplus Framework Crypto Library
 
-- [Homepage](https://aplus-framework.com/packages/crypto)
+- [Home](https://aplus-framework.com/packages/crypto)
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/crypto/index.html)
 - [API Documentation](https://docs.aplus-framework.com/packages/crypto.html)
 
+[![tests](https://github.com/aplus-framework/crypto/actions/workflows/tests.yml/badge.svg)](https://github.com/aplus-framework/crypto/actions/workflows/tests.yml)
 [![pipeline](https://gitlab.com/aplus-framework/libraries/crypto/badges/master/pipeline.svg)](https://gitlab.com/aplus-framework/libraries/crypto/-/pipelines?scope=branches)
 [![coverage](https://gitlab.com/aplus-framework/libraries/crypto/badges/master/coverage.svg?job=test:php)](https://aplus-framework.gitlab.io/libraries/crypto/coverage/)
 [![packagist](https://img.shields.io/packagist/v/aplus/crypto)](https://packagist.org/packages/aplus/crypto)
