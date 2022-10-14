@@ -181,6 +181,8 @@ look at the following example:
 
 .. code-block:: php
 
+    $genericHash = new GenericHash($key);
+
     $message = 'Hello, friend';
     $signature = $genericHash->signature($message); // string
 
