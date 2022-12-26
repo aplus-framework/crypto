@@ -43,7 +43,7 @@ class Sign
      */
     public static function makeSecretKey(string $keyPair) : string
     {
-        return \sodium_crypto_sign_secretkey($keyPair);
+        return \sodium_crypto_sign_secretkey($keyPair); // @phpstan-ignore-line
     }
 
     /**
@@ -59,7 +59,7 @@ class Sign
      */
     public static function makePublicKey(string $keyPair) : string
     {
-        return \sodium_crypto_sign_publickey($keyPair);
+        return \sodium_crypto_sign_publickey($keyPair); // @phpstan-ignore-line
     }
 
     /**
@@ -76,7 +76,7 @@ class Sign
      */
     public static function signature(string $message, string $secretKey) : string
     {
-        return \sodium_crypto_sign_detached($message, $secretKey);
+        return \sodium_crypto_sign_detached($message, $secretKey); // @phpstan-ignore-line
     }
 
     /**
@@ -98,6 +98,6 @@ class Sign
         string $signature,
         string $publicKey
     ) : bool {
-        return \sodium_crypto_sign_verify_detached($signature, $message, $publicKey);
+        return \sodium_crypto_sign_verify_detached($signature, $message, $publicKey); // @phpstan-ignore-line
     }
 }
