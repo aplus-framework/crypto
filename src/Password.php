@@ -10,6 +10,7 @@
 namespace Framework\Crypto;
 
 use InvalidArgumentException;
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -61,7 +62,7 @@ class Password
      * @return string
      */
     public static function hash(
-        string $password,
+        #[SensitiveParameter] string $password,
         int $opslimit = null,
         int $memlimit = null
     ) : string {
@@ -86,7 +87,7 @@ class Password
      * @return bool
      */
     public static function needsRehash(
-        string $hash,
+        #[SensitiveParameter] string $hash,
         int $opslimit = null,
         int $memlimit = null
     ) : bool {
@@ -109,8 +110,10 @@ class Password
      *
      * @return bool
      */
-    public static function verify(string $password, string $hash) : bool
-    {
+    public static function verify(
+        #[SensitiveParameter] string $password,
+        #[SensitiveParameter] string $hash
+    ) : bool {
         return \sodium_crypto_pwhash_str_verify($hash, $password);
     }
 

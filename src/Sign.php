@@ -9,6 +9,7 @@
  */
 namespace Framework\Crypto;
 
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -41,7 +42,7 @@ class Sign
      *
      * @return string
      */
-    public static function makeSecretKey(string $keyPair) : string
+    public static function makeSecretKey(#[SensitiveParameter] string $keyPair) : string
     {
         return \sodium_crypto_sign_secretkey($keyPair); // @phpstan-ignore-line
     }
@@ -57,7 +58,7 @@ class Sign
      *
      * @return string
      */
-    public static function makePublicKey(string $keyPair) : string
+    public static function makePublicKey(#[SensitiveParameter] string $keyPair) : string
     {
         return \sodium_crypto_sign_publickey($keyPair); // @phpstan-ignore-line
     }
@@ -74,8 +75,10 @@ class Sign
      *
      * @return string
      */
-    public static function signature(string $message, string $secretKey) : string
-    {
+    public static function signature(
+        #[SensitiveParameter] string $message,
+        #[SensitiveParameter] string $secretKey
+    ) : string {
         return \sodium_crypto_sign_detached($message, $secretKey); // @phpstan-ignore-line
     }
 
@@ -94,9 +97,9 @@ class Sign
      * @return bool
      */
     public static function verify(
-        string $message,
-        string $signature,
-        string $publicKey
+        #[SensitiveParameter] string $message,
+        #[SensitiveParameter] string $signature,
+        #[SensitiveParameter] string $publicKey
     ) : bool {
         return \sodium_crypto_sign_verify_detached($signature, $message, $publicKey); // @phpstan-ignore-line
     }

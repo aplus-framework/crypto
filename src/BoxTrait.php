@@ -10,6 +10,7 @@
 namespace Framework\Crypto;
 
 use Exception;
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -52,7 +53,7 @@ trait BoxTrait
      *
      * @return string
      */
-    public static function makeSecretKey(string $keyPair) : string
+    public static function makeSecretKey(#[SensitiveParameter] string $keyPair) : string
     {
         return \sodium_crypto_box_secretkey($keyPair);
     }
@@ -68,7 +69,7 @@ trait BoxTrait
      *
      * @return string
      */
-    public static function makePublicKey(string $keyPair) : string
+    public static function makePublicKey(#[SensitiveParameter] string $keyPair) : string
     {
         return \sodium_crypto_box_publickey($keyPair);
     }

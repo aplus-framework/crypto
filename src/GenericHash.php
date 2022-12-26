@@ -11,6 +11,7 @@ namespace Framework\Crypto;
 
 use LengthException;
 use RangeException;
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -34,8 +35,10 @@ class GenericHash
      * @throws LengthException if key length is not between 16 and 64
      * @throws RangeException if the hashLength value is not in the range 16 to 64
      */
-    public function __construct(string $key, int $hashLength = \SODIUM_CRYPTO_GENERICHASH_BYTES)
-    {
+    public function __construct(
+        #[SensitiveParameter] string $key,
+        int $hashLength = \SODIUM_CRYPTO_GENERICHASH_BYTES
+    ) {
         $this->validateKey($key);
         $this->validateHashLength($hashLength);
         $this->key = $key;
@@ -49,7 +52,7 @@ class GenericHash
      *
      * @throws LengthException if key length is not between 16 and 64
      */
-    protected function validateKey(string $key) : void
+    protected function validateKey(#[SensitiveParameter] string $key) : void
     {
         $length = \mb_strlen($key, '8bit');
         if ($length < \SODIUM_CRYPTO_GENERICHASH_KEYBYTES_MIN
@@ -96,8 +99,10 @@ class GenericHash
      *
      * @return string
      */
-    public function signature(string $message, int $hashLength = null) : string
-    {
+    public function signature(
+        #[SensitiveParameter] string $message,
+        int $hashLength = null
+    ) : string {
         return Utils::bin2base64(
             $this->makeHash($message, $hashLength),
             \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING
@@ -117,8 +122,11 @@ class GenericHash
      *
      * @return bool
      */
-    public function verify(string $message, string $signature, int $hashLength = null) : bool
-    {
+    public function verify(
+        #[SensitiveParameter] string $message,
+        #[SensitiveParameter] string $signature,
+        int $hashLength = null
+    ) : bool {
         return \hash_equals(
             $this->makeHash($message, $hashLength),
             Utils::base642bin($signature, \SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING)
@@ -137,7 +145,7 @@ class GenericHash
      *
      * @return string
      */
-    protected function makeHash(string $message, int $length = null) : string
+    protected function makeHash(#[SensitiveParameter] string $message, int $length = null) : string
     {
         if ($length !== null) {
             $this->validateHashLength($length);

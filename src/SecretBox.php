@@ -11,6 +11,7 @@ namespace Framework\Crypto;
 
 use Exception;
 use LengthException;
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -34,8 +35,10 @@ class SecretBox
      *
      * @throws LengthException if key or nonce has not the required length
      */
-    public function __construct(string $key, string $nonce)
-    {
+    public function __construct(
+        #[SensitiveParameter] string $key,
+        #[SensitiveParameter] string $nonce
+    ) {
         $this->validatedLengths($key, $nonce);
         $this->key = $key;
         $this->nonce = $nonce;
@@ -49,8 +52,10 @@ class SecretBox
      *
      * @throws LengthException if key or nonce has not the required length
      */
-    protected function validatedLengths(string $key, string $nonce) : void
-    {
+    protected function validatedLengths(
+        #[SensitiveParameter] string $key,
+        #[SensitiveParameter]  string $nonce
+    ) : void {
         $length = \mb_strlen($key, '8bit');
         if ($length !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
             throw new LengthException(
@@ -76,7 +81,7 @@ class SecretBox
      *
      * @return string
      */
-    public function encrypt(string $message) : string
+    public function encrypt(#[SensitiveParameter] string $message) : string
     {
         return \sodium_crypto_secretbox($message, $this->nonce, $this->key);
     }
@@ -90,7 +95,7 @@ class SecretBox
      *
      * @return false|string
      */
-    public function decrypt(string $ciphertext) : false | string
+    public function decrypt(#[SensitiveParameter] string $ciphertext) : false | string
     {
         return \sodium_crypto_secretbox_open($ciphertext, $this->nonce, $this->key);
     }

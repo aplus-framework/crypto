@@ -11,6 +11,7 @@ namespace Framework\Crypto;
 
 use LengthException;
 use LogicException;
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -39,8 +40,11 @@ class Box
      *
      * @throws LengthException if nonce is set has not the required length
      */
-    public function __construct(string $secretKey, string $publicKey, string $nonce = null)
-    {
+    public function __construct(
+        #[SensitiveParameter] string $secretKey,
+        #[SensitiveParameter] string $publicKey,
+        #[SensitiveParameter] string $nonce = null
+    ) {
         $this->secretKey = $secretKey;
         $this->publicKey = $publicKey;
         if ($nonce !== null) {
@@ -56,7 +60,7 @@ class Box
      *
      * @throws LengthException if nonce has not the required length
      */
-    protected function validateNonce(string $nonce) : void
+    protected function validateNonce(#[SensitiveParameter] string $nonce) : void
     {
         $length = \mb_strlen($nonce, '8bit');
         if ($length !== \SODIUM_CRYPTO_BOX_NONCEBYTES) {
@@ -76,7 +80,7 @@ class Box
      *
      * @return string
      */
-    protected function getNonce(?string $nonce) : string
+    protected function getNonce(#[SensitiveParameter] ?string $nonce) : string
     {
         if ($nonce !== null) {
             $this->validateNonce($nonce);
@@ -117,8 +121,10 @@ class Box
      *
      * @return string
      */
-    public function encrypt(string $message, string $nonce = null) : string
-    {
+    public function encrypt(
+        #[SensitiveParameter] string $message,
+        #[SensitiveParameter] string $nonce = null
+    ) : string {
         return \sodium_crypto_box(
             $message,
             $this->getNonce($nonce),
@@ -140,8 +146,10 @@ class Box
      *
      * @return false|string
      */
-    public function decrypt(string $ciphertext, string $nonce = null) : false | string
-    {
+    public function decrypt(
+        #[SensitiveParameter] string $ciphertext,
+        #[SensitiveParameter] string $nonce = null
+    ) : false | string {
         return \sodium_crypto_box_open(
             $ciphertext,
             $this->getNonce($nonce),

@@ -9,6 +9,7 @@
  */
 namespace Framework\Crypto;
 
+use SensitiveParameter;
 use SodiumException;
 
 /**
@@ -32,8 +33,10 @@ class BoxSeal
      *
      * @return string
      */
-    public static function encrypt(string $message, string $publicKey) : string
-    {
+    public static function encrypt(
+        #[SensitiveParameter] string $message,
+        #[SensitiveParameter] string $publicKey
+    ) : string {
         return \sodium_crypto_box_seal($message, $publicKey);
     }
 
@@ -50,8 +53,10 @@ class BoxSeal
      * @return false|string The message or false if the ciphertext could not be
      * decrypted
      */
-    public static function decrypt(string $ciphertext, string $keyPair) : false | string
-    {
+    public static function decrypt(
+        #[SensitiveParameter] string $ciphertext,
+        #[SensitiveParameter]  string $keyPair
+    ) : false | string {
         return \sodium_crypto_box_seal_open($ciphertext, $keyPair);
     }
 }
