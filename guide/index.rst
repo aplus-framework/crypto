@@ -47,17 +47,17 @@ Below we generate the key pair and keys for a user:
 
     use Framework\Crypto\Box;
 
-    $user1KeyPair = Box::makeKeyPair();
-    $user1PublicKey = Box::makePublicKey($user1KeyPair);
-    $user1SecretKey = Box::makeSecretKey($user1KeyPair);
+    $user1KeyPair = Box::makeKeyPair(); // string
+    $user1PublicKey = Box::makePublicKey($user1KeyPair); // string
+    $user1SecretKey = Box::makeSecretKey($user1KeyPair); // string
 
 Then we generate the key pair and another user's keys:
 
 .. code-block:: php
 
-    $user2KeyPair = Box::makeKeyPair();
-    $user2PublicKey = Box::makePublicKey($user2KeyPair);
-    $user2SecretKey = Box::makeSecretKey($user2KeyPair);
+    $user2KeyPair = Box::makeKeyPair(); // string
+    $user2PublicKey = Box::makePublicKey($user2KeyPair); // string
+    $user2SecretKey = Box::makeSecretKey($user2KeyPair); // string
 
 Once that's done, let's create a box to encrypt messages from user 1 to user 2.
 
@@ -65,7 +65,7 @@ First, we create a nonce:
 
 .. code-block:: php
 
-    $nonce = Box::makeNonce();
+    $nonce = Box::makeNonce(); // string
 
 Next, we create the Box for user 1, using the secret key for user 1 and the
 public key for user 2:
@@ -79,7 +79,7 @@ So we can encrypt a message with the ``encrypt`` method:
 .. code-block:: php
 
     $messageFromUser1 = 'What is your name?';
-    $ciphertext1 = $user1Box->encrypt($messageFromUser1);
+    $ciphertext1 = $user1Box->encrypt($messageFromUser1); // string
 
 And it can already be decrypted by user 1, using the ``decrypt`` method:
 
@@ -112,7 +112,7 @@ And then encrypt the message:
 .. code-block:: php
 
     $messageFromUser2 = 'John';
-    $ciphertext2 = $user2Box->encrypt($messageFromUser2);
+    $ciphertext2 = $user2Box->encrypt($messageFromUser2); // string
 
 Then the ciphertext can be decrypted by user 1:
 
@@ -139,13 +139,13 @@ the ``makeKeyPair`` method:
 
     use Framework\Crypto\BoxSeal;
 
-    $keyPair = BoxSeal::makeKeyPair();
+    $keyPair = BoxSeal::makeKeyPair(); // string
 
 Then it generates a public key with the ``makePublicKey`` method:
 
 .. code-block:: php
 
-    $publicKey = BoxSeal::makePublicKey($keyPair);
+    $publicKey = BoxSeal::makePublicKey($keyPair); // string
 
 And this public key will be given to whoever will encrypt the messages.
 
@@ -154,7 +154,7 @@ Below is a message being encrypted:
 .. code-block:: php
 
     $message = 'Expect Us!';
-    $ciphertext = BoxSeal::encrypt($message, $publicKey);
+    $ciphertext = BoxSeal::encrypt($message, $publicKey); // string
 
 Then, when the ciphertext is delivered to the recipient, he can decrypt the
 message using the ``$keyPair`` with the ``decrypt`` method:
@@ -174,7 +174,7 @@ First, you must generate a key with the ``makeKey`` method:
 
     use Framework\Crypto\GenericHash;
 
-    $key = GenericHash::makeKey();
+    $key = GenericHash::makeKey(); // string
 
 Once this is done, it is possible to generate signatures for messages. Let's
 look at the following example:
@@ -258,8 +258,8 @@ properties by the ``setOpsLimit`` and ``setMemLimit`` methods:
 
 .. code-block:: php
 
-    Password::setOpsLimit(Password::LIMIT_SENSITIVE);
-    Password::setMemLimit(Password::LIMIT_MODERATE);
+    Password::setOpsLimit(Password::LIMIT_SENSITIVE); // void
+    Password::setMemLimit(Password::LIMIT_MODERATE); // void
 
 LIMIT_INTERACTIVE
 """""""""""""""""
@@ -295,8 +295,8 @@ below:
 
     use Framework\Crypto\SecretBox;
 
-    $key = SecretBox::makeKey();
-    $nonce = SecretBox::makeNonce();
+    $key = SecretBox::makeKey(); // string
+    $nonce = SecretBox::makeNonce(); // string
 
 With these two strings it will be possible to encrypt messages and decrypt
 ciphertexts.
@@ -313,7 +313,7 @@ Once this is done, it is possible to encrypt messages:
 .. code-block:: php
 
     $message = 'Hello, Sodium!';
-    $ciphertext = $secretBox->encrypt($message);
+    $ciphertext = $secretBox->encrypt($message); // string
 
 And also decrypt:
 
