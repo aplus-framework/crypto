@@ -54,7 +54,7 @@ class SecretBox
      */
     protected function validatedLengths(
         #[SensitiveParameter] string $key,
-        #[SensitiveParameter]  string $nonce
+        #[SensitiveParameter] string $nonce
     ) : void {
         $length = \mb_strlen($key, '8bit');
         if ($length !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {

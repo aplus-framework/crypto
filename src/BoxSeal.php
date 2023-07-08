@@ -55,7 +55,7 @@ class BoxSeal
      */
     public static function decrypt(
         #[SensitiveParameter] string $ciphertext,
-        #[SensitiveParameter]  string $keyPair
+        #[SensitiveParameter] string $keyPair
     ) : false | string {
         return \sodium_crypto_box_seal_open($ciphertext, $keyPair);
     }
