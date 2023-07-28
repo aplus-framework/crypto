@@ -23,9 +23,9 @@
     "homepage": "https://aplus-framework.com/packages/crypto",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/crypto/issues",
+        "issues": "https://github.com/aplus-framework/crypto/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/crypto",
+        "source": "https://github.com/aplus-framework/crypto",
         "docs": "https://docs.aplus-framework.com/guides/libraries/crypto/"
     },
     "funding": [
