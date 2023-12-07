@@ -41,9 +41,12 @@ class Box
      * @throws LengthException if nonce is set has not the required length
      */
     public function __construct(
-        #[SensitiveParameter] string $secretKey,
-        #[SensitiveParameter] string $publicKey,
-        #[SensitiveParameter] string $nonce = null
+        #[SensitiveParameter]
+        string $secretKey,
+        #[SensitiveParameter]
+        string $publicKey,
+        #[SensitiveParameter]
+        string $nonce = null
     ) {
         $this->secretKey = $secretKey;
         $this->publicKey = $publicKey;
@@ -122,8 +125,10 @@ class Box
      * @return string
      */
     public function encrypt(
-        #[SensitiveParameter] string $message,
-        #[SensitiveParameter] string $nonce = null
+        #[SensitiveParameter]
+        string $message,
+        #[SensitiveParameter]
+        string $nonce = null
     ) : string {
         return \sodium_crypto_box(
             $message,
@@ -147,8 +152,10 @@ class Box
      * @return false|string
      */
     public function decrypt(
-        #[SensitiveParameter] string $ciphertext,
-        #[SensitiveParameter] string $nonce = null
+        #[SensitiveParameter]
+        string $ciphertext,
+        #[SensitiveParameter]
+        string $nonce = null
     ) : false | string {
         return \sodium_crypto_box_open(
             $ciphertext,

@@ -76,8 +76,10 @@ class Sign
      * @return string
      */
     public static function signature(
-        #[SensitiveParameter] string $message,
-        #[SensitiveParameter] string $secretKey
+        #[SensitiveParameter]
+        string $message,
+        #[SensitiveParameter]
+        string $secretKey
     ) : string {
         return \sodium_crypto_sign_detached($message, $secretKey); // @phpstan-ignore-line
     }
@@ -97,9 +99,12 @@ class Sign
      * @return bool
      */
     public static function verify(
-        #[SensitiveParameter] string $message,
-        #[SensitiveParameter] string $signature,
-        #[SensitiveParameter] string $publicKey
+        #[SensitiveParameter]
+        string $message,
+        #[SensitiveParameter]
+        string $signature,
+        #[SensitiveParameter]
+        string $publicKey
     ) : bool {
         return \sodium_crypto_sign_verify_detached($signature, $message, $publicKey); // @phpstan-ignore-line
     }

@@ -36,7 +36,8 @@ class GenericHash
      * @throws RangeException if the hashLength value is not in the range 16 to 64
      */
     public function __construct(
-        #[SensitiveParameter] string $key,
+        #[SensitiveParameter]
+        string $key,
         int $hashLength = \SODIUM_CRYPTO_GENERICHASH_BYTES
     ) {
         $this->validateKey($key);
@@ -100,7 +101,8 @@ class GenericHash
      * @return string
      */
     public function signature(
-        #[SensitiveParameter] string $message,
+        #[SensitiveParameter]
+        string $message,
         int $hashLength = null
     ) : string {
         return Utils::bin2base64(
@@ -123,8 +125,10 @@ class GenericHash
      * @return bool
      */
     public function verify(
-        #[SensitiveParameter] string $message,
-        #[SensitiveParameter] string $signature,
+        #[SensitiveParameter]
+        string $message,
+        #[SensitiveParameter]
+        string $signature,
         int $hashLength = null
     ) : bool {
         return \hash_equals(

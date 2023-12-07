@@ -36,8 +36,10 @@ class SecretBox
      * @throws LengthException if key or nonce has not the required length
      */
     public function __construct(
-        #[SensitiveParameter] string $key,
-        #[SensitiveParameter] string $nonce
+        #[SensitiveParameter]
+        string $key,
+        #[SensitiveParameter]
+        string $nonce
     ) {
         $this->validatedLengths($key, $nonce);
         $this->key = $key;
@@ -53,8 +55,10 @@ class SecretBox
      * @throws LengthException if key or nonce has not the required length
      */
     protected function validatedLengths(
-        #[SensitiveParameter] string $key,
-        #[SensitiveParameter] string $nonce
+        #[SensitiveParameter]
+        string $key,
+        #[SensitiveParameter]
+        string $nonce
     ) : void {
         $length = \mb_strlen($key, '8bit');
         if ($length !== \SODIUM_CRYPTO_SECRETBOX_KEYBYTES) {
