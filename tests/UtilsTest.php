@@ -12,7 +12,7 @@ namespace Tests\Crypto;
 use Framework\Crypto\Utils;
 use PHPUnit\Framework\TestCase;
 
-class UtilsTest extends TestCase
+final class UtilsTest extends TestCase
 {
     public function testHexBin() : void
     {
