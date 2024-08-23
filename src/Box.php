@@ -46,7 +46,7 @@ class Box
         #[SensitiveParameter]
         string $publicKey,
         #[SensitiveParameter]
-        string $nonce = null
+        ?string $nonce = null
     ) {
         $this->secretKey = $secretKey;
         $this->publicKey = $publicKey;
@@ -128,7 +128,7 @@ class Box
         #[SensitiveParameter]
         string $message,
         #[SensitiveParameter]
-        string $nonce = null
+        ?string $nonce = null
     ) : string {
         return \sodium_crypto_box(
             $message,
@@ -155,7 +155,7 @@ class Box
         #[SensitiveParameter]
         string $ciphertext,
         #[SensitiveParameter]
-        string $nonce = null
+        ?string $nonce = null
     ) : false | string {
         return \sodium_crypto_box_open(
             $ciphertext,

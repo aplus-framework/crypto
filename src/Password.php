@@ -58,8 +58,8 @@ class Password
     public static function hash(
         #[SensitiveParameter]
         string $password,
-        int $opslimit = null,
-        int $memlimit = null
+        ?int $opslimit = null,
+        ?int $memlimit = null
     ) : string {
         $opslimit ??= static::getOpsLimit();
         $memlimit ??= static::getMemLimit();
@@ -84,8 +84,8 @@ class Password
     public static function needsRehash(
         #[SensitiveParameter]
         string $hash,
-        int $opslimit = null,
-        int $memlimit = null
+        ?int $opslimit = null,
+        ?int $memlimit = null
     ) : bool {
         $opslimit ??= static::getOpsLimit();
         $memlimit ??= static::getMemLimit();

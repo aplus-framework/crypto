@@ -103,7 +103,7 @@ class GenericHash
     public function signature(
         #[SensitiveParameter]
         string $message,
-        int $hashLength = null
+        ?int $hashLength = null
     ) : string {
         return Utils::bin2base64(
             $this->makeHash($message, $hashLength),
@@ -129,7 +129,7 @@ class GenericHash
         string $message,
         #[SensitiveParameter]
         string $signature,
-        int $hashLength = null
+        ?int $hashLength = null
     ) : bool {
         return \hash_equals(
             $this->makeHash($message, $hashLength),
@@ -149,7 +149,7 @@ class GenericHash
      *
      * @return string
      */
-    protected function makeHash(#[SensitiveParameter] string $message, int $length = null) : string
+    protected function makeHash(#[SensitiveParameter] string $message, ?int $length = null) : string
     {
         if ($length !== null) {
             $this->validateHashLength($length);
