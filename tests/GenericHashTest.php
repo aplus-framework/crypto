@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\GenericHash;
+use Aplus\Crypto\GenericHash;
 use PHPUnit\Framework\TestCase;
 
 /**

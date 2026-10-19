@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\Password;
+use Aplus\Crypto\Password;
 
 class PasswordMock extends Password
 {

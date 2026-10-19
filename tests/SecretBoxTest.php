@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\SecretBox;
+use Aplus\Crypto\SecretBox;
 use PHPUnit\Framework\TestCase;
 
 final class SecretBoxTest extends TestCase

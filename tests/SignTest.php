@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\Sign;
+use Aplus\Crypto\Sign;
 use PHPUnit\Framework\TestCase;
 
 /**

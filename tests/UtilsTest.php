@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\Utils;
+use Aplus\Crypto\Utils;
 use PHPUnit\Framework\TestCase;
 
 final class UtilsTest extends TestCase

@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\BoxSeal;
+use Aplus\Crypto\BoxSeal;
 use PHPUnit\Framework\TestCase;
 
 /**

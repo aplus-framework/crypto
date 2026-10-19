@@ -9,7 +9,7 @@
  */
 namespace Tests\Crypto;
 
-use Framework\Crypto\Box;
+use Aplus\Crypto\Box;
 
 /**
  * Class BoxMock.
