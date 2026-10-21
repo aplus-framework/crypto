@@ -45,7 +45,7 @@ Below we generate the key pair and keys for a user:
 
 .. code-block:: php
 
-    use Framework\Crypto\Box;
+    use Aplus\Crypto\Box;
 
     $user1KeyPair = Box::makeKeyPair(); // string
     $user1PublicKey = Box::makePublicKey($user1KeyPair); // string
@@ -137,7 +137,7 @@ the ``makeKeyPair`` method:
 
 .. code-block:: php
 
-    use Framework\Crypto\BoxSeal;
+    use Aplus\Crypto\BoxSeal;
 
     $keyPair = BoxSeal::makeKeyPair(); // string
 
@@ -172,7 +172,7 @@ First, you must generate a key with the ``makeKey`` method:
 
 .. code-block:: php
 
-    use Framework\Crypto\GenericHash;
+    use Aplus\Crypto\GenericHash;
 
     $key = GenericHash::makeKey(); // string
 
@@ -206,7 +206,7 @@ Let's see how to generate a hash:
 
 .. code-block:: php
 
-    use Framework\Crypto\Password;
+    use Aplus\Crypto\Password;
 
     $password = 'iloveyou';
     $hash = Password::hash($password); // string
@@ -293,7 +293,7 @@ below:
 
 .. code-block:: php
 
-    use Framework\Crypto\SecretBox;
+    use Aplus\Crypto\SecretBox;
 
     $key = SecretBox::makeKey(); // string
     $nonce = SecretBox::makeNonce(); // string
@@ -333,7 +333,7 @@ First, you must have a key pair to generate the secret and public keys:
 
 .. code-block:: php
 
-    use Framework\Crypto\Sign;
+    use Aplus\Crypto\Sign;
 
     $keyPair = Sign::makeKeyPair(); // string
 
@@ -386,7 +386,7 @@ It is possible to convert a binary string to hexadecimal:
 
 .. code-block:: php
 
-    use Framework\Crypto\Utils;
+    use Aplus\Crypto\Utils;
 
     $string = 'foo';
     $hex = Utils::bin2hex($string); // string
@@ -404,7 +404,7 @@ It is possible to convert a binary string to base64:
 
 .. code-block:: php
 
-    use Framework\Crypto\Utils;
+    use Aplus\Crypto\Utils;
 
     $string = 'foo';
     $base64 = Utils::bin2base64($string); // string
