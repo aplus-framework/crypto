@@ -24,52 +24,52 @@ registerArgumentsSet(
 );
 registerArgumentsSet(
     'password_limits',
-    \Framework\Crypto\Password::LIMIT_INTERACTIVE,
-    \Framework\Crypto\Password::LIMIT_MODERATE,
-    \Framework\Crypto\Password::LIMIT_SENSITIVE,
+    \Aplus\Crypto\Password::LIMIT_INTERACTIVE,
+    \Aplus\Crypto\Password::LIMIT_MODERATE,
+    \Aplus\Crypto\Password::LIMIT_SENSITIVE,
 );
 expectedArguments(
-    \Framework\Crypto\GenericHash::__construct(),
+    \Aplus\Crypto\GenericHash::__construct(),
     1,
     argumentsSet('generichash_bytes')
 );
 expectedArguments(
-    \Framework\Crypto\Password::hash(),
+    \Aplus\Crypto\Password::hash(),
     1,
     argumentsSet('password_limits')
 );
 expectedArguments(
-    \Framework\Crypto\Password::hash(),
+    \Aplus\Crypto\Password::hash(),
     2,
     argumentsSet('password_limits')
 );
 expectedArguments(
-    \Framework\Crypto\Password::needsRehash(),
+    \Aplus\Crypto\Password::needsRehash(),
     1,
     argumentsSet('password_limits')
 );
 expectedArguments(
-    \Framework\Crypto\Password::needsRehash(),
+    \Aplus\Crypto\Password::needsRehash(),
     2,
     argumentsSet('password_limits')
 );
 expectedArguments(
-    \Framework\Crypto\Password::setMemLimit(),
+    \Aplus\Crypto\Password::setMemLimit(),
     0,
     argumentsSet('password_limits')
 );
 expectedArguments(
-    \Framework\Crypto\Password::setOpsLimit(),
+    \Aplus\Crypto\Password::setOpsLimit(),
     0,
     argumentsSet('password_limits')
 );
 expectedArguments(
-    \Framework\Crypto\Utils::base642bin(),
+    \Aplus\Crypto\Utils::base642bin(),
     1,
     argumentsSet('base64_variants')
 );
 expectedArguments(
-    \Framework\Crypto\Utils::bin2base64(),
+    \Aplus\Crypto\Utils::bin2base64(),
     1,
     argumentsSet('base64_variants')
 );
